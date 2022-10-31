@@ -1,3 +1,4 @@
 .env
 memo.txt
 venv
+db.sqlite3
