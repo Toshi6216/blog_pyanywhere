@@ -1,4 +1,0 @@
-
-https://github.com/Toshi6216/deploy_test.git
-git remote add origin https://github.com/Toshi6216/deploy_test.git
-git remote set-url origin https://github.com/Toshi6216/deploy_test.git
