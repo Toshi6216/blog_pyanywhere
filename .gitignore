@@ -8,5 +8,3 @@ settings_local.py
 __pycache__
 .DS_Store
 staticfiles
-dumpファイルについて.txt
-アプリ仕様書_hotta_blog_github.xlsx

@@ -22,9 +22,10 @@ from config.settings import MEDIA_ROOT
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include("blog.urls")),
+    path('blog/', include("blog.urls")),
     path('accounts/', include("accounts.urls")),
     path('accounts/', include("allauth.urls")),
+    
 ]
 
 if settings.DEBUG:

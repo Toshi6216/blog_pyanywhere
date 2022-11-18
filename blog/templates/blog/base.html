@@ -24,12 +24,15 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
-        <li class="nav-item active">
+        <li class="nav-item">
             <a class="nav-link" href="{% url 'index' %}">Home <span class="sr-only"></span></a>
         </li>
         {% if user.is_authenticated %}
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'post_new' %}">投稿 <span class="sr-only"></span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'profile' user.pk %}">ユーザー情報 <span class="sr-only"></span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'account_logout' %}">ログアウト <span class="sr-only"></span></a>
@@ -87,7 +90,7 @@
                 <div class="card">
                     <h5 class="card-header">blogリスト</h5>
                     <div class="card-body">
-                        {% for post in posts_data %}
+                        {% for post in posts_data2 %}
                             
                                 <a href="{% url 'post_detail' post.id %}"> {{ post.title }} </a>
                                 <p>{{ post.contentcard.content }}</p>
@@ -105,7 +108,7 @@
     </main>
 
     <footer class="py-2 bg-dark">
-        <p class="m-0 text-center text-white">Copyright &copy; nonbiri-blog 2022</p>
+        <p class="m-0 text-center text-white"><a href="{% url 'test' %}">Copyright &copy; nonbiri-blog 2022</a></p>
     </footer>
 
     <!-- Optional JavaScript -->

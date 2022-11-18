@@ -2,9 +2,17 @@ from django.shortcuts import render, redirect
 from allauth.account import views
 from .forms import SignupForm, ProfileForm
 from django.urls import reverse
-from django.views.generic import CreateView
+from django.views.generic import CreateView, DetailView, UpdateView
 from django.urls import reverse_lazy
 from django.contrib.auth import login
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import get_user_model
+
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.shortcuts import redirect, resolve_url
+
+
+User = get_user_model()
 
 #ログイン
 class LoginView(views.LoginView):
@@ -45,3 +53,27 @@ def newSignupView(request):
     }
   
     return render(request, 'blog/signup_form.html', ctx)
+
+#user確認用view
+class OnlyYouMixin(UserPassesTestMixin):
+    raise_exception = True
+
+    def test_func(self):
+        # 今ログインしてるユーザーのpkと、そのユーザー情報ページのpkが同じか、又はスーパーユーザーなら許可
+        user = self.request.user
+        return user.pk == self.kwargs['pk'] or user.is_superuser
+
+#Profile内容確認用view
+class ProfileView(OnlyYouMixin, DetailView):
+    model = User
+    template_name = 'blog/profile.html'
+
+
+##Profile内容編集用view
+#class UserUpdate(OnlyYouMixin, UpdateView):
+#    model = User
+#    form_class = UserUpdateForm
+#    template_name = 'blog/profile_form.html'
+#
+#    def get_success_url(self):
+#        return resolve_url('profile', pk=self.kwargs['pk'])

@@ -12,3 +12,11 @@ django-environ
 gunicorn
 psycopg2-binary
 whitenoise
+
+#settings appに追加
+#    'widget_tweaks',
+#    'django.contrib.sites',
+#    'allauth',
+#    'allauth.account',
+#    'allauth.socialaccount',
+    

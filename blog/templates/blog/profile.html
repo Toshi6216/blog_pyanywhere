@@ -1,0 +1,20 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+<table class="table">
+    <tbody>
+        <tr>
+            <th>ユーザー名</th>
+            <td>{{ user.username }}</td>
+        </tr>
+        <tr>
+            <th>EMAIL</th>
+            <td>{{ user.email }}</td>
+        </tr>
+        <tr>
+            <th>ニックネーム</th>
+            <td>{{ user.profile.nickname }}</td>
+        </tr>
+    </tbody>
+</table>
+{% endblock %}

@@ -1,11 +1,13 @@
 from multiprocessing import get_context
 from django.shortcuts import render,  redirect
-from django.views.generic import View, TemplateView, CreateView, UpdateView, ListView
+from django.views.generic import View, TemplateView, CreateView, UpdateView, ListView, DetailView
 from .models import *
 from .forms import *
 from django.contrib.auth.mixins import LoginRequiredMixin
 from . import forms
 from django.urls import reverse
+from django.contrib.auth.decorators import login_required
+
 
 #TopページのIndexページのview
 class IndexView(ListView):
@@ -111,6 +113,7 @@ class PostEditView(LoginRequiredMixin, UpdateView):
             return self.render_to_response(ctx)
 
 #カテゴリ追加フォーム 
+@login_required
 def categoryFormView(request):
     category_list = Category.objects.all()
     form = CategoryForm(request.POST or None)
@@ -118,6 +121,7 @@ def categoryFormView(request):
         'category_list':category_list,
         'form':form,
     }
+
     if request.method == 'POST':
         if form.is_valid():
             Category.objects.create(**form.cleaned_data)
@@ -150,6 +154,12 @@ class CategoryView(View):
         return render(request, 'blog/index.html', {
             'post_data' : post_data
         })
+
+
+
+
+
+
 
 
 # ___ここから下はお試し用____
